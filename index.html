@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+<body>
+	<header></header>
+	<main>
+		<div class="wrapper" id="main1"></div>
+	</main>
+	<footer></footer>
+	<script>
+		 keys = {
+			'0': ['q','w','e','r','t','y','u','i','o','p'],
+			'1': ['a','s','d','f','g','h','j','k','l'],
+			'2': ['z','x','c','v','b','n','m'],
+			'length': 3
+		}
+		 hash = {
+			'q': 'qq.com', 'w': 'weibo.com', 'e': 'ele.me', 'r': 'renren.com', 't': 'tianya.com', 'y': 'youtube.com', 'u': 'uc.com', 'i': 'iqiyi.com', 'o': 'opera.com', 'p': undefined, 'a': 'acfun.tv', 's': 'sohu.com', 'z': 'zhihu.com', 'm': 'www.mcdonalds.com.cn'
+		}
+		//取出localStorage 中 uuu 对应的hash
+		 hashInLocalStorage = JSON.parse(localStorage.getItem('uuu') || 'null')
+		if (hashInLocalStorage) {
+			hash = hashInLocalStorage
+		}
+
+		//遍历keys,生成kbd标签
+		index = 0
+		while(index< keys['length']){ //0 1 2
+			div1 = document.createElement('div')
+		 	main1.appendChild(div1)
+		 	row = keys[index] //第一个数组.第二个数组.第三个数组.
+		 	index2 = 0
+		 	while(index2<row['length']){// 0-9 0-8 0-6
+		 		kbd = document.createElement('kbd')
+		 		kbd.textContent = row[index2]
+		 		button1 = document.createElement('button')
+		 		button1.textContent = '编辑'
+		 		button1.id = row[index2]
+		 		button1.onclick = function(xzkjnxlkcjlk){
+		 			//xzkjnxlkcjlk['target']就是用户点击的元素
+		 			key = xzkjnxlkcjlk['target']['id']//qwer
+		 			x = prompt('给我一个网址')// qq.com
+		 			hash[key] = x //hash变更
+		 			localStorage.setItem('uuu',JSON.stringify(hash))
+		 			console.log(hash)
+		 		}
+		 		kbd.appendChild(button1)
+		 		div1.appendChild(kbd)
+		 		index2=index2+1
+		 	}
+			index = index+1
+		}
+
+		document.onkeypress = function(xzkjnxlkcjlk){
+			key = xzkjnxlkcjlk['key']
+			website = hash[key]
+			// location.href = 'http://' + website
+			window.open('http://' + website,'_blank')
+		}
+	</script>
+</body>
+</html>
